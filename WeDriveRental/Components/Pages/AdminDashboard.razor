@@ -1,0 +1,51 @@
+﻿@page "/admin"
+
+@using WeDriveRental.Repositories
+@inject WeDriveRentalRepository repo;
+
+@using Microsoft.AspNetCore.Authorization
+@using WeDriveRental.Domain.Models
+
+@attribute [Authorize(Roles = "Admin")]
+
+
+<PageTitle>Admin Dashboard</PageTitle>
+
+<h1>Admin Dashboard</h1>
+	<h3>Add car</h3>
+
+<EditForm Model="NewCar" OnValidSubmit="HandleSubmit" FormName="AddNewCar">
+	<DataAnnotationsValidator/>
+	<ValidationSummary/>
+
+	<InputText @bind-Value="NewCar.Name"></InputText>
+	<strong>Description: </strong><InputTextArea @bind-Value="NewCar.Description" class="form-control"></InputTextArea>
+	<strong>Image Url: </strong><InputText @bind-Value="NewCar.ImageUrl"></InputText>
+	<strong>Price per day (SEK): </strong><InputNumber @bind-Value="NewCar.PricePerDayInSEK"></InputNumber>
+	<strong>Available Yes/No: </strong><input type="checkbox" @bind="isAvailable"></input> 
+	
+	<input type="submit" class="btn btn-success"/>
+</EditForm>
+
+
+
+@code {
+
+	private List<CarModel>? AllCars;
+
+	public bool isAvailable { get; set; }
+
+	[SupplyParameterFromForm]
+	public CarModel NewCar { get; set; } = new();
+
+	protected override async Task OnInitializedAsync()
+	{
+		AllCars = await repo.GetAllCarsAsync();
+	}
+
+	private async Task HandleSubmit()
+	{
+		NewCar.IsAvailable = true;
+		await repo.AddCarAsync(NewCar);
+	}
+}

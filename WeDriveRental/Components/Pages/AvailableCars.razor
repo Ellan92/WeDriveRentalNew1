@@ -1,0 +1,87 @@
+﻿@page "/availablecars"
+@using WeDriveRental.Domain.Models
+@using WeDriveRental.Repositories
+
+@inject WeDriveRentalRepository repo;
+
+<PageTitle>Cars</PageTitle>
+
+<h1>Here are our cars!</h1>
+@if(cars != null)
+{
+	<div class="row">
+		@foreach (CarModel? car in cars)
+		{
+			<div class="col-lg-4 col-md-6 col-sm-12">
+				<div class="card shadow mt-2" style="width: 100%">
+					<img class="card-img-top" src="@car.ImageUrl" alt="Card image cap" />
+					<div class="card-body">
+						<h1>@car.Name</h1>
+						<p><strong>Description: </strong> @car.Description</p>
+						<p><strong>Price per day (SEK): </strong> @car.PricePerDayInSEK</p>
+						@if (car?.IsAvailable == true)
+						{
+							<button class="btn btn-primary">Rent car</button>
+						}
+						else
+						{
+							<p>Car is not available right now.</p>
+						}
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+}
+
+
+@* @if (cars != null)
+{
+	<div>
+		@foreach (CarModel? car in cars)
+		{
+			<div class="card shadow mt-2" style="width: 100%">
+				<img class="card-img-top" src="@car.ImageUrl" alt="Card image cap" />
+				<div class="card-body">
+					<h1>@car.Name</h1>
+					<p><strong>Description: </strong> @car.Description</p>
+					<p><strong>Price per day (SEK): </strong> @car.PricePerDayInSEK</p>
+					@if (car?.IsAvailable == true)
+					{
+						<button class="btn btn-primary">Rent car</button>
+					}
+					else
+					{
+						<p>Car is not available right now.</p>
+					}
+					
+				</div>
+			</div>
+
+
+		}
+	</div>
+}
+ *@
+@code {
+
+	private List<CarModel>? cars;
+	private List<BookingModel>? bookings;
+
+	public CarModel NewCar { get; set; } = new();
+	public BookingModel NewBooking { get; set; } = new();
+
+	protected override async Task OnInitializedAsync()
+	{
+		try
+		{
+			cars = await repo.GetAllCarsAsync();
+
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"Error fetching cars: {ex.Message}");
+		}
+	}
+
+}

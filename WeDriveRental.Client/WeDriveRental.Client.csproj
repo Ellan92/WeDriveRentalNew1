@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\WeDriveRental.Domain\WeDriveRental.Domain.csproj" />
+    <ProjectReference Include="..\WeDriveRental.Domain\WeDriveRental.Domain.csproj" />
   </ItemGroup>
 
 </Project>
