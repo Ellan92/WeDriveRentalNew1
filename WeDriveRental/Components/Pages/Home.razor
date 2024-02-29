@@ -6,16 +6,60 @@
 
 <PageTitle>Welcome!</PageTitle>
 
-<h1>Welcome</h1>
 
-<style>
+@* <style>
 	body {
-		background-image: url('/Images/WeDriveRentalImage.jpg'); /* Specify the path to your image */
+		margin: 0;
+		padding: 0;
+		height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-image: url('/Images/WeDriveRentalPorsche.png'); /* Specify the path to your image */
 		background-size: 100%; /* Adjust the background size as needed */
 		background-repeat: no-repeat; /* Prevent the background from repeating */
 
 	}
-</style>
+</style> *@
+
+@* <div class="text-center" style="background-image: url('/Images/WeDriveRentalPorsche.png'); background-size: cover; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+
+	<h1 class="text-white display-2 font-weight-light">Welcome To WeDriveRental</h1>
+
+	<div>
+		<a href="/login" class="btn btn-primary m-2">Log In</a>
+		<a href="/register" class="btn btn-secondary m-2">Register</a>
+		<a href="/availablecars" class="btn btn-success m-2">Our Cars</a>
+	</div>
+
+</div> *@
+
+@* <div class="card text-white bg-dark" style="width: 100%; margin: auto;">
+	<img src="/Images/WeDriveRentalPorsche.png" class="card-img" alt="Background Image" style="object-fit: cover; height: 100vh;">
+	<div class="card-img-overlay d-flex flex-column justify-content-center align-items-center">
+		<h1 class="display-2 font-weight-light" style="background-color: rgba(0, 0, 0, 0.5); padding: 20px;">Welcome To WeDriveRental</h1>
+		<div style="background-color: rgba(0, 0, 0, 0.5); padding: 20px;">
+			<a href="/login" class="btn btn-primary m-2">Log In</a>
+			<a href="/register" class="btn btn-secondary m-2">Register</a>
+			<a href="/availablecars" class="btn btn-success m-2">Our Cars</a>
+		</div>
+	</div>
+</div> *@
+
+<div class="card text-white bg-dark" style="width: 100%; margin: auto;">
+	<img src="/Images/WeDriveRentalPorsche.png" class="card-img" alt="Background Image" style="object-fit: cover; height: 80vh;">
+	<div class="card-img-overlay d-flex flex-column justify-content-start align-items-center">
+		<h1 class="display-2 font-weight-light mb-4" style="background-color: rgba(0, 0, 0, 0.5); padding: 20px;">Welcome To WeDriveRental</h1>
+		<div style="background-color: rgba(0, 0, 0, 0.5); padding: 20px;">
+			<a href="/account/login" class="btn btn-primary m-2">Log In</a>
+			<a href="/account/register" class="btn btn-secondary m-2">Register</a>
+			<a href="/availablecars" class="btn btn-success m-2">Our Cars</a>
+		</div>
+	</div>
+	<p class="text-center text-white mt-4">
+		Welcome to WeDriveRental, where luxury meets the open road. At our exclusive car rental site, we specialize in providing an unparalleled experience of sophistication and style with our fleet of high-end luxury vehicles. Choose from a curated selection of top-tier brands, each meticulously maintained to ensure a seamless and thrilling driving experience. Whether you crave the powerful performance of a sleek sports car or the refined elegance of a luxury sedan, our rental options cater to the most discerning tastes. Elevate your journey and make a statement on the road by indulging in the epitome of automotive opulence with our luxury car rental services.
+	</p>
+</div>
 
 @code{
 
