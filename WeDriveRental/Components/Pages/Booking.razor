@@ -1,0 +1,63 @@
+﻿@page "/booking/{id:int}"
+@rendermode InteractiveServer
+
+@using WeDriveRental.Domain.Models
+
+<div style="background-image: url('/Images/Ford-GT.png'); background-size: cover; background-position: center top; height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+
+    <h1 class="text-white display-2">Book a Car</h1>
+
+    <div class="row">
+        <div class="col-md-12">
+            <section style="background-color: rgba(0, 0, 0, 0.5); padding: 20px; border-radius: 10px;">
+                <EditForm Model="bookingModel" OnValidSubmit="BookCar">
+                    <DataAnnotationsValidator />
+                    <h2 class="text-white">Provide Booking Details</h2>
+                    <hr class="text-white" />
+                    <div class="form-floating mb-3">
+                        <InputText @bind-Value="bookingModel.UserEmail" class="form-control" autocomplete="email" aria-required="true" placeholder="Your Email" />
+                        <label for="userEmail" class="form-label text-white">Your Email</label>
+                        <ValidationMessage For="() => bookingModel.UserEmail" class="text-danger" />
+                    </div>
+                    <div class="form-floating mb-3">
+                        <InputDate @bind-Value="bookingModel.StartDate" class="form-control" placeholder="Start Date" />
+                        <label for="startDate" class="form-label text-white">Start Date</label>
+                        <ValidationMessage For="() => bookingModel.StartDate" class="text-danger" />
+                    </div>
+                    <div class="form-floating mb-3">
+                        <InputDate @bind-Value="bookingModel.EndDate" class="form-control" placeholder="End Date" />
+                        <label for="endDate" class="form-label text-white">End Date</label>
+                        <ValidationMessage For="() => bookingModel.EndDate" class="text-danger" />
+                    </div>
+                    <div class="form-floating mb-3">
+                        <!-- Assume you have a list of available cars -->
+@*                         <select @bind="bookingModel.CarId" class="form-control">
+                            @foreach (var car in availableCars)
+                            {
+                                <option value="@car.Id">@car.Name</option>
+                            }
+                        </select> *@
+                        <label for="carId" class="form-label text-white">Select a Car</label>
+                        <ValidationMessage For="() => bookingModel.CarId" class="text-danger" />
+                    </div>
+                    <div>
+                        <button type="submit" class="w-100 btn btn-lg btn-primary">Book Car</button>
+                    </div>
+                </EditForm>
+            </section>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+
+    private BookingModel bookingModel = new BookingModel();
+    private List<CarModel> availableCars; // Assume you have a list of available cars
+
+    private void BookCar()
+    {
+        // Perform booking logic with bookingModel
+    }
+}

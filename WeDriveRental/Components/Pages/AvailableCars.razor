@@ -3,7 +3,8 @@
 @using WeDriveRental.Repositories
 
 @inject WeDriveRentalRepository repo;
-
+@inject NavigationManager navigationManager;
+@rendermode InteractiveServer
 <PageTitle>Cars</PageTitle>
 
 <h1>Here are our cars!</h1>
@@ -21,7 +22,7 @@
 						<p><strong>Price per day (SEK): </strong> @car.PricePerDayInSEK</p>
 						@if (car?.IsAvailable == true)
 						{
-							<button class="btn btn-primary">Rent car</button>
+							<button @* onclick="@HandleClick(car)" *@ class="btn btn-primary">Rent car</button>
 						}
 						else
 						{
@@ -83,5 +84,11 @@
 			Console.WriteLine($"Error fetching cars: {ex.Message}");
 		}
 	}
+
+	// private async Task HandleClick(CarModel selectedCar)
+	// {
+	// 	navigationManager.NavigateTo($"/booking/{selectedCar.Id}");
+		
+	// }
 
 }

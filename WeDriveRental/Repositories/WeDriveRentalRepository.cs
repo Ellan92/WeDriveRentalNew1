@@ -55,5 +55,50 @@ namespace WeDriveRental.Repositories
 				carToUpdate.PricePerDayInSEK = car.PricePerDayInSEK;
 			}
 		}
-	}
+
+        // BOOKINGS
+
+        public async Task<BookingModel?> GetBookingByIdAsync(int bookingId)
+        {
+            return await _context.Bookings.FirstOrDefaultAsync(c => c.Id == bookingId);
+        }
+
+        public async Task<List<BookingModel>> GetAllBookingsAsync()
+        {
+            if (_context.Bookings != null)
+            {
+                return await _context.Bookings.ToListAsync();
+            }
+
+            throw new NullReferenceException();
+        }
+
+        public async Task AddBookingAsync(BookingModel booking)
+        {
+            _context.Bookings.Add(booking);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateBooking(BookingModel booking)
+        {
+            BookingModel? bookingToUpdate = await GetBookingByIdAsync(booking.Id);
+
+            if (bookingToUpdate != null)
+            {
+                bookingToUpdate.UserEmail = booking.UserEmail;
+                bookingToUpdate.StartDate = booking.StartDate;
+                bookingToUpdate.EndDate = booking.EndDate;
+                bookingToUpdate.CarId = booking.CarId;
+            }
+        }
+
+
+
+        //public int Id { get; set; }
+        //public string? UserEmail { get; set; }
+        //public DateTime? StartDate { get; set; }
+        //public DateTime? EndDate { get; set; }
+        //public int? CarId { get; set; }
+        //public CarModel? Car { get; set; }
+    }
 }
